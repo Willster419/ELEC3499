@@ -24,9 +24,9 @@
 
 //variables for the petersons method
 //whose turn it is to enter the crtiical section
-int turn;
+volatile int turn;
 //if thread n is ready for entry into the critical process
-int ready[2];
+volatile int ready[2] = {0,0};
 
 //variables for the 
 //counter that will be fought over
@@ -97,8 +97,8 @@ int main(int argc,char* argv[])
   }
   //wait for it
   pthread_join(tid,NULL);
-  printf("program done, value of counter is %d\ntook the CPU %f second, %f nanoseconds\n%f total nanoseconds\n"
-    ,counter,total_time,total_time_nanosec,(BILLION*total_time)+total_time_nanosec);
+  total_time_nanosec = (BILLION*total_time)+total_time_nanosec;
+  printf("program done, value of counter is %d\ntook the CPU %f total miliseconds\n",counter,total_time_nanosec / 1000000);
   return 0;
 }
 
@@ -106,7 +106,7 @@ void *run()
 {
   //session 1
   //get the tme before starting...
-  if(clock_gettime(CLOCK_REALTIME, &start) == -1)
+  if(clock_gettime(CLOCK_THREAD_CPUTIME_ID, &start) == -1)
   {
     printf("error in clock_gettime\n");
     pthread_exit(0);
@@ -130,7 +130,7 @@ void *run()
       break;
     }
   }
-  if(clock_gettime(CLOCK_REALTIME, &end) == -1)
+  if(clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end) == -1)
   {
     printf("error in clock_gettime\n");
     pthread_exit(0);

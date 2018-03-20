@@ -1,0 +1,4 @@
+petersons average time: 3.5ms
+mutex average time: 41.8ms
+why does mutex take longer?
+mutex takes more cycles to lock the variables vs petersons. It is known that mutex makes calls at the system/kernel level. It is also known that mutex takes the threads out of the cpu schedule queue. It could be reasoned that mutex not only takes more cycles for system call processing, but also involves the scheduler more, and therefore gets less CPU time than petersons. The mutex will leave the processor queue more than petersons. However, due to the issues with the VM, there could also be other variables unknown to us.
