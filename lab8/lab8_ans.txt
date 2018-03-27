@@ -1,0 +1,23 @@
+NOTE: second parameter is method, 1=petersons/mutex, 2=semaphores
+      third parameter is debug, use it to see debug values
+
+with iterations=999 (counter does not fill)
+  ./lab8 999 x 0
+  petersons/mutex average time (x=1): 0.025ms
+  semaphore average time (x=2): 0.017ms
+
+with iterations=9999 (counter fills)
+  ./lab8 9999 x 0
+  petersons/mutex average time (x=1): 40.7ms
+  semaphore average time (x=2): 5.42ms
+
+with itterations=999999 (lots)
+  ./lab8 999999 x 0
+  petersons/mutex average time (x=1): 4500ms
+  semaphore average time (x=2): 205.7ms
+
+which method took more reader time?
+peterTex (petersons/Mutex)
+
+why?
+peterTex is constantly running in the cpu and getting scheduled because of the while loop. Therefore it takes CPU time slots away from what could go to the mutex to lock and unlock the counter variable. Also, from the previous lab we also know that mutexs have more OS overhead, andtherefore take more time to process. Therefore, semaphore time will be lower.

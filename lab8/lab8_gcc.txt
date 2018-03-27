@@ -1,0 +1,1 @@
+gcc lab8.c -pthread -DUSE_SEMS -o lab8
