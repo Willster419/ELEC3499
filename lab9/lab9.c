@@ -38,6 +38,8 @@ void inc_staleness();
 void evict_and_replace(int address);
 void evict_and_replace_old(int address);
 void print_page_table();
+void add_page_old();
+bool find_page(int address);
 
 struct Page
 {
@@ -174,26 +176,7 @@ int main(int argc,char* argv[])
 
 void LRU(int address)
 {
-  bool page_found = false;
-  //check for the page and reset staleness
-  struct Page *ref;
-  ref = head;
-  int counter = 0;
-  if(DEBUG)
-    printf("DEBUG: checking if address %d is in page table...\n",address);
-  while(ref->next != NULL)
-  {
-    if((ref->address == address) && (!ref->is_empty))
-    {
-      printf("horray, address %d found in table!\n",address);
-      //set to -1 cause it will be set to 0 later
-      ref->staleness = -1;
-      page_found = true;
-      break;
-    }
-    ref = ref->next;
-  }
-  //ONLY DO THIS IF FAULT!!!
+  bool page_found = find_page(address);
   if(!page_found)
   {
     printf("page fault found, requested address=%d\n",address);
@@ -201,28 +184,13 @@ void LRU(int address)
     {
       printf("page table is full, evict/replace and inc num_faults\n");
       evict_and_replace(address);
-      num_faults++;
     }
     else
     {
-      printf("page table not full, \"add\" to buttom of stack\n");
-      /*old method
-      tail->is_tail = false;
-      struct Page *temp;
-      temp = malloc(sizeof(struct Page));
-      temp->is_head = false;
-      temp->is_tail = true;
-      temp->address = address;
-      temp->staleness = 0;
-      temp->next = NULL;
-      temp->prev = tail;
-      tail->next = temp;
-      tail = temp;
-      */
-      //new method:
-      //don't make a new one, just set the newest one with values
+      printf("page table not full, \"add\" to buttom of stack and inc num_faults\n");
       add_page(address);
     }
+    num_faults++;
   }
   inc_staleness();
 }
@@ -363,4 +331,45 @@ void add_page(int address)
   ref->staleness = -1;
   if(DEBUG)
     printf("DEBUG: \"adding\" page of address %d to page location %d\n",address,counter);
+}
+
+void add_page_old()
+{
+  /*old method
+  tail->is_tail = false;
+  struct Page *temp;
+  temp = malloc(sizeof(struct Page));
+  temp->is_head = false;
+  temp->is_tail = true;
+  temp->address = address;
+  temp->staleness = 0;
+  temp->next = NULL;
+  temp->prev = tail;
+  tail->next = temp;
+  tail = temp;
+  */
+}
+
+bool find_page(int address)
+{
+  //check for the page and reset staleness
+  struct Page *ref;
+  ref = head;
+  int counter = 0;
+  if(DEBUG)
+    printf("DEBUG: checking if address %d is in page table...\n",address);
+  while(ref->next != NULL)
+  {
+    if((ref->address == address) && (!ref->is_empty))
+    {
+      printf("horray, address %d found in table!\n",address);
+      //set to -1 cause it will be set to 0 later
+      ref->staleness = -1;
+      //page_found = true;
+      return true;
+      //break;
+    }
+    ref = ref->next;
+  }
+  return false;
 }
