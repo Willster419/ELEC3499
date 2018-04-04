@@ -2,7 +2,7 @@
  * Willard Wider
  * 04/02/18
  * lab9.c
- * lab on 
+ * lab on page tables
  */
 
 //usefull headers to include
@@ -20,6 +20,8 @@
 #define RANDOM_PAGE_TRACE_LENGTH 10
 #define MIN_PAGE_NUMBER 0
 #define MAX_PAGE_NUMBER 31
+#define MIN_FRAMES_ALLOWED 4
+#define MAX_FRAMES_ALLOWED 24
 #define MODE 1//0=LRU,1=OPT
 
 //globals
@@ -63,7 +65,7 @@ int main(int argc,char* argv[])
   //first arguement: num of frames allocated
   if(argv[1] != NULL)
     num_frames_alocated = atoi(argv[1]);
-  if(num_frames_alocated < 4 || num_frames_alocated > 24)
+  if(num_frames_alocated < MIN_FRAMES_ALLOWED || num_frames_alocated > MAX_FRAMES_ALLOWED)
   {
     printf("ERROR: invalid num_frames_alocated: %d\naccepted number must be between 4 and 24\n",num_frames_alocated);
     return -1;

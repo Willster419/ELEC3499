@@ -1,0 +1,88 @@
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# gcc lab9.c -std=c99 -o lab9
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# ./lab9 4 3,7,7,9,3,5,9,7
+DEBUG: parsing command line arguement
+DEBUG: number of page traces: 8
+DEBUG: int attached: 3, index 1
+DEBUG: int attached: 7, index 2
+DEBUG: int attached: 7, index 3
+DEBUG: int attached: 9, index 4
+DEBUG: int attached: 3, index 5
+DEBUG: int attached: 5, index 6
+DEBUG: int attached: 9, index 7
+DEBUG: int attached: 7, index 8
+at start, page table is:
+Page entry 0: address=-1, is_head=1, is_tail=0, is_empty=1
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: simulation starts, MODE=1, (OPT)
+DEBUG: checking if address 3 is in page table...
+page fault found, requested address=3
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 3 to page location 0
+after round 1, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 7 is in page table...
+page fault found, requested address=7
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 7 to page location 1
+after round 2, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 7 is in page table...
+horray, address 7 found in table!
+after round 3, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 9 is in page table...
+page fault found, requested address=9
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 9 to page location 2
+after round 4, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=9, is_head=0, is_tail=0, is_empty=0
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 3 is in page table...
+horray, address 3 found in table!
+after round 5, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=9, is_head=0, is_tail=0, is_empty=0
+Page entry 3: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 5 is in page table...
+page fault found, requested address=5
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 5 to page location 3
+after round 6, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=9, is_head=0, is_tail=0, is_empty=0
+Page entry 3: address=5, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 9 is in page table...
+horray, address 9 found in table!
+after round 7, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=9, is_head=0, is_tail=0, is_empty=0
+Page entry 3: address=5, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 7 is in page table...
+horray, address 7 found in table!
+after round 8, page table is as follows:
+Page entry 0: address=3, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=7, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=9, is_head=0, is_tail=0, is_empty=0
+Page entry 3: address=5, is_head=0, is_tail=1, is_empty=0
+Simluation ends, num_faults=4
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# 

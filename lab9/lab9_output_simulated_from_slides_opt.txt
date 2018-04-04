@@ -1,0 +1,264 @@
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# gcc lab9.c -std=c99 -o lab9
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# ./lab9 3 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+DEBUG: parsing command line arguement
+DEBUG: number of page traces: 20
+DEBUG: int attached: 7, index 1
+DEBUG: int attached: 0, index 2
+DEBUG: int attached: 1, index 3
+DEBUG: int attached: 2, index 4
+DEBUG: int attached: 0, index 5
+DEBUG: int attached: 3, index 6
+DEBUG: int attached: 0, index 7
+DEBUG: int attached: 4, index 8
+DEBUG: int attached: 2, index 9
+DEBUG: int attached: 3, index 10
+DEBUG: int attached: 0, index 11
+DEBUG: int attached: 3, index 12
+DEBUG: int attached: 2, index 13
+DEBUG: int attached: 1, index 14
+DEBUG: int attached: 2, index 15
+DEBUG: int attached: 0, index 16
+DEBUG: int attached: 1, index 17
+DEBUG: int attached: 7, index 18
+DEBUG: int attached: 0, index 19
+DEBUG: int attached: 1, index 20
+at start, page table is:
+Page entry 0: address=-1, is_head=1, is_tail=0, is_empty=1
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 2: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: simulation starts, MODE=1, (OPT)
+DEBUG: checking if address 7 is in page table...
+page fault found, requested address=7
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 7 to page location 0
+after round 1, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1
+Page entry 2: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 0 is in page table...
+page fault found, requested address=0
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 0 to page location 1
+after round 2, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=-1, is_head=0, is_tail=1, is_empty=1
+DEBUG: checking if address 1 is in page table...
+page fault found, requested address=1
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 1 to page location 2
+after round 3, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 2 is in page table...
+page fault found, requested address=2
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 4, value=0
+DEBUG: page at address 0 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 5, value=3
+DEBUG: checking for page trace index 6, value=0
+DEBUG: checking for page trace index 7, value=4
+DEBUG: checking for page trace index 8, value=2
+DEBUG: checking for page trace index 9, value=3
+DEBUG: checking for page trace index 10, value=0
+DEBUG: checking for page trace index 11, value=3
+DEBUG: checking for page trace index 12, value=2
+DEBUG: checking for page trace index 13, value=1
+DEBUG: page at address 1 used 10 cycles in future, bool set
+DEBUG: checking for page trace index 14, value=2
+DEBUG: checking for page trace index 15, value=0
+DEBUG: checking for page trace index 16, value=1
+DEBUG: checking for page trace index 17, value=7
+DEBUG: page at address 7 used 14 cycles in future, bool set
+DEBUG: checking for page trace index 18, value=0
+DEBUG: checking for page trace index 19, value=1
+DEBUG: found page that is most future stale (value=14), selected for removal (address=7)
+DEBUG: evicted page address=7, new page address = 2
+after round 4, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 0 is in page table...
+horray, address 0 found in table!
+after round 5, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 3 is in page table...
+page fault found, requested address=3
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 6, value=0
+DEBUG: page at address 0 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 7, value=4
+DEBUG: checking for page trace index 8, value=2
+DEBUG: page at address 2 used 3 cycles in future, bool set
+DEBUG: checking for page trace index 9, value=3
+DEBUG: checking for page trace index 10, value=0
+DEBUG: checking for page trace index 11, value=3
+DEBUG: checking for page trace index 12, value=2
+DEBUG: checking for page trace index 13, value=1
+DEBUG: page at address 1 used 8 cycles in future, bool set
+DEBUG: checking for page trace index 14, value=2
+DEBUG: checking for page trace index 15, value=0
+DEBUG: checking for page trace index 16, value=1
+DEBUG: checking for page trace index 17, value=7
+DEBUG: checking for page trace index 18, value=0
+DEBUG: checking for page trace index 19, value=1
+DEBUG: found page that is most future stale (value=8), selected for removal (address=1)
+DEBUG: evicted page address=1, new page address = 3
+after round 6, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 0 is in page table...
+horray, address 0 found in table!
+after round 7, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 4 is in page table...
+page fault found, requested address=4
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 8, value=2
+DEBUG: page at address 2 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 9, value=3
+DEBUG: page at address 3 used 2 cycles in future, bool set
+DEBUG: checking for page trace index 10, value=0
+DEBUG: page at address 0 used 3 cycles in future, bool set
+DEBUG: checking for page trace index 11, value=3
+DEBUG: checking for page trace index 12, value=2
+DEBUG: checking for page trace index 13, value=1
+DEBUG: checking for page trace index 14, value=2
+DEBUG: checking for page trace index 15, value=0
+DEBUG: checking for page trace index 16, value=1
+DEBUG: checking for page trace index 17, value=7
+DEBUG: checking for page trace index 18, value=0
+DEBUG: checking for page trace index 19, value=1
+DEBUG: found page that is most future stale (value=3), selected for removal (address=0)
+DEBUG: evicted page address=0, new page address = 4
+after round 8, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=4, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 2 is in page table...
+horray, address 2 found in table!
+after round 9, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=4, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 3 is in page table...
+horray, address 3 found in table!
+after round 10, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=4, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 0 is in page table...
+page fault found, requested address=0
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 11, value=3
+DEBUG: page at address 3 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 12, value=2
+DEBUG: page at address 2 used 2 cycles in future, bool set
+DEBUG: checking for page trace index 13, value=1
+DEBUG: checking for page trace index 14, value=2
+DEBUG: checking for page trace index 15, value=0
+DEBUG: checking for page trace index 16, value=1
+DEBUG: checking for page trace index 17, value=7
+DEBUG: checking for page trace index 18, value=0
+DEBUG: checking for page trace index 19, value=1
+DEBUG: found that page 1 is never used in future, selected for removal (address=4)
+DEBUG: evicted page address=4, new page address = 0
+after round 11, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 3 is in page table...
+horray, address 3 found in table!
+after round 12, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 2 is in page table...
+horray, address 2 found in table!
+after round 13, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=3, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 1 is in page table...
+page fault found, requested address=1
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 14, value=2
+DEBUG: page at address 2 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 15, value=0
+DEBUG: page at address 0 used 2 cycles in future, bool set
+DEBUG: checking for page trace index 16, value=1
+DEBUG: checking for page trace index 17, value=7
+DEBUG: checking for page trace index 18, value=0
+DEBUG: checking for page trace index 19, value=1
+DEBUG: found that page 2 is never used in future, selected for removal (address=3)
+DEBUG: evicted page address=3, new page address = 1
+after round 14, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 2 is in page table...
+horray, address 2 found in table!
+after round 15, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 0 is in page table...
+horray, address 0 found in table!
+after round 16, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 1 is in page table...
+horray, address 1 found in table!
+after round 17, page table is as follows:
+Page entry 0: address=2, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 7 is in page table...
+page fault found, requested address=7
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: reset used_in_future and future_staleness values
+DEBUG: checking for page trace index 18, value=0
+DEBUG: page at address 0 used 1 cycles in future, bool set
+DEBUG: checking for page trace index 19, value=1
+DEBUG: page at address 1 used 2 cycles in future, bool set
+DEBUG: found that page 0 is never used in future, selected for removal (address=2)
+DEBUG: evicted page address=2, new page address = 7
+after round 18, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 0 is in page table...
+horray, address 0 found in table!
+after round 19, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+DEBUG: checking if address 1 is in page table...
+horray, address 1 found in table!
+after round 20, page table is as follows:
+Page entry 0: address=7, is_head=1, is_tail=0, is_empty=0
+Page entry 1: address=0, is_head=0, is_tail=0, is_empty=0
+Page entry 2: address=1, is_head=0, is_tail=1, is_empty=0
+Simluation ends, num_faults=9
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# 

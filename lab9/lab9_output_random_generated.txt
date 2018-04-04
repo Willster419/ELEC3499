@@ -1,0 +1,218 @@
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# gcc lab9.c -std=c99 -o lab9
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9# ./lab9 7
+DEBUG: making random page trace
+DEBUG: Random page trace value is 28 for sequence 0 of 10
+DEBUG: Random page trace value is 3 for sequence 1 of 10
+DEBUG: Random page trace value is 7 for sequence 2 of 10
+DEBUG: Random page trace value is 21 for sequence 3 of 10
+DEBUG: Random page trace value is 14 for sequence 4 of 10
+DEBUG: Random page trace value is 1 for sequence 5 of 10
+DEBUG: Random page trace value is 3 for sequence 6 of 10
+DEBUG: Random page trace value is 1 for sequence 7 of 10
+DEBUG: Random page trace value is 4 for sequence 8 of 10
+DEBUG: Random page trace value is 19 for sequence 9 of 10
+at start, page table is:
+Page entry 0: address=-1, is_head=1, is_tail=0, is_empty=1, staleness=0,
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 3: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 4: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: simulation starts, MODE=0, (LRU)
+DEBUG: checking if address 28 is in page table...
+page fault found, requested address=28
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 28 to page location 0
+DEBUG: increasing staleness of page 0 with now staleness of 0
+DEBUG: increasing staleness of page 1 with now staleness of 0
+DEBUG: increasing staleness of page 2 with now staleness of 0
+DEBUG: increasing staleness of page 3 with now staleness of 0
+DEBUG: increasing staleness of page 4 with now staleness of 0
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 1, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=0,
+Page entry 1: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 3: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 4: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 3 is in page table...
+page fault found, requested address=3
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 3 to page location 1
+DEBUG: increasing staleness of page 0 with now staleness of 1
+DEBUG: increasing staleness of page 1 with now staleness of 0
+DEBUG: increasing staleness of page 2 with now staleness of 0
+DEBUG: increasing staleness of page 3 with now staleness of 0
+DEBUG: increasing staleness of page 4 with now staleness of 0
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 2, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=1,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 2: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 3: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 4: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 7 is in page table...
+page fault found, requested address=7
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 7 to page location 2
+DEBUG: increasing staleness of page 0 with now staleness of 2
+DEBUG: increasing staleness of page 1 with now staleness of 1
+DEBUG: increasing staleness of page 2 with now staleness of 0
+DEBUG: increasing staleness of page 3 with now staleness of 0
+DEBUG: increasing staleness of page 4 with now staleness of 0
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 3, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=2,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 3: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 4: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 21 is in page table...
+page fault found, requested address=21
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 21 to page location 3
+DEBUG: increasing staleness of page 0 with now staleness of 3
+DEBUG: increasing staleness of page 1 with now staleness of 2
+DEBUG: increasing staleness of page 2 with now staleness of 1
+DEBUG: increasing staleness of page 3 with now staleness of 0
+DEBUG: increasing staleness of page 4 with now staleness of 0
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 4, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=3,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 4: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 14 is in page table...
+page fault found, requested address=14
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 14 to page location 4
+DEBUG: increasing staleness of page 0 with now staleness of 4
+DEBUG: increasing staleness of page 1 with now staleness of 3
+DEBUG: increasing staleness of page 2 with now staleness of 2
+DEBUG: increasing staleness of page 3 with now staleness of 1
+DEBUG: increasing staleness of page 4 with now staleness of 0
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 5, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=4,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=3,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 5: address=-1, is_head=0, is_tail=0, is_empty=1, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 1 is in page table...
+page fault found, requested address=1
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 1 to page location 5
+DEBUG: increasing staleness of page 0 with now staleness of 5
+DEBUG: increasing staleness of page 1 with now staleness of 4
+DEBUG: increasing staleness of page 2 with now staleness of 3
+DEBUG: increasing staleness of page 3 with now staleness of 2
+DEBUG: increasing staleness of page 4 with now staleness of 1
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 6, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=5,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=4,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=3,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 5: address=1, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 3 is in page table...
+horray, address 3 found in table!
+DEBUG: increasing staleness of page 0 with now staleness of 6
+DEBUG: increasing staleness of page 1 with now staleness of 0
+DEBUG: increasing staleness of page 2 with now staleness of 4
+DEBUG: increasing staleness of page 3 with now staleness of 3
+DEBUG: increasing staleness of page 4 with now staleness of 2
+DEBUG: increasing staleness of page 5 with now staleness of 1
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 7, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=6,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=4,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=3,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 5: address=1, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 1 is in page table...
+horray, address 1 found in table!
+DEBUG: increasing staleness of page 0 with now staleness of 7
+DEBUG: increasing staleness of page 1 with now staleness of 1
+DEBUG: increasing staleness of page 2 with now staleness of 5
+DEBUG: increasing staleness of page 3 with now staleness of 4
+DEBUG: increasing staleness of page 4 with now staleness of 3
+DEBUG: increasing staleness of page 5 with now staleness of 0
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 8, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=7,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=5,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=4,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=3,
+Page entry 5: address=1, is_head=0, is_tail=0, is_empty=0, staleness=0,
+Page entry 6: address=-1, is_head=0, is_tail=1, is_empty=1, staleness=0,
+DEBUG: checking if address 4 is in page table...
+page fault found, requested address=4
+DEBUG: is_full returns false
+page table not full, "add" to buttom of stack and inc num_faults
+DEBUG: "adding" page of address 4 to page location 6
+DEBUG: increasing staleness of page 0 with now staleness of 8
+DEBUG: increasing staleness of page 1 with now staleness of 2
+DEBUG: increasing staleness of page 2 with now staleness of 6
+DEBUG: increasing staleness of page 3 with now staleness of 5
+DEBUG: increasing staleness of page 4 with now staleness of 4
+DEBUG: increasing staleness of page 5 with now staleness of 1
+DEBUG: increasing staleness of page 6 with now staleness of 0
+after round 9, page table is as follows:
+Page entry 0: address=28, is_head=1, is_tail=0, is_empty=0, staleness=8,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=6,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=5,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=4,
+Page entry 5: address=1, is_head=0, is_tail=0, is_empty=0, staleness=1,
+Page entry 6: address=4, is_head=0, is_tail=1, is_empty=0, staleness=0,
+DEBUG: checking if address 19 is in page table...
+page fault found, requested address=19
+DEBUG: is_full returns true
+page table is full, evict/replace and inc num_faults
+DEBUG: evicted page address=28, new page address = 19
+DEBUG: increasing staleness of page 0 with now staleness of 0
+DEBUG: increasing staleness of page 1 with now staleness of 3
+DEBUG: increasing staleness of page 2 with now staleness of 7
+DEBUG: increasing staleness of page 3 with now staleness of 6
+DEBUG: increasing staleness of page 4 with now staleness of 5
+DEBUG: increasing staleness of page 5 with now staleness of 2
+DEBUG: increasing staleness of page 6 with now staleness of 1
+after round 10, page table is as follows:
+Page entry 0: address=19, is_head=1, is_tail=0, is_empty=0, staleness=0,
+Page entry 1: address=3, is_head=0, is_tail=0, is_empty=0, staleness=3,
+Page entry 2: address=7, is_head=0, is_tail=0, is_empty=0, staleness=7,
+Page entry 3: address=21, is_head=0, is_tail=0, is_empty=0, staleness=6,
+Page entry 4: address=14, is_head=0, is_tail=0, is_empty=0, staleness=5,
+Page entry 5: address=1, is_head=0, is_tail=0, is_empty=0, staleness=2,
+Page entry 6: address=4, is_head=0, is_tail=1, is_empty=0, staleness=1,
+Simluation ends, num_faults=8
+root@OSC:/media/sf_shared_folders/ELEC3499/lab9#
