@@ -1,6 +1,6 @@
 /*
  * Willard Wider
- * 04/02/18
+ * 04/04/18
  * lab9.c
  * lab on page tables
  */
@@ -139,7 +139,7 @@ int main(int argc,char* argv[])
   
   //run the page simulation
   if(DEBUG)
-      printf("DEBUG: simulation starts, MODE=%d, (%s)\n",MODE, MODE==0? "LRU":"OPT");
+      printf("DEBUG: simulation starts, MODE=%d, (%s)\n",MODE, MODE==0? "LRU":MODE==1? "OPT":"BOTH");
   switch(MODE)
   {
     case 0:
@@ -175,7 +175,7 @@ int main(int argc,char* argv[])
       free_page_table(head);
       create_page_table();
       num_faults = 0;
-      printf("Starting LRU (1 of 2)...\n");
+      printf("Starting OPT (2 of 2)...\n");
       for(int i = 0; i < page_trace_length; i++)
       {
         optimal(page_trace[i],i);
@@ -285,6 +285,7 @@ void print_page_table()
     switch(MODE)
     {
       case 0://LRU
+      case 2:
         printf("Page entry %d: address=%d, is_head=%d, is_tail=%d, is_empty=%d, staleness=%d,\n",
           counter++,ref->address,ref->is_head,ref->is_tail,ref->is_empty,ref->staleness);
       break;
