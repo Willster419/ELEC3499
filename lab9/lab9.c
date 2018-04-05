@@ -22,7 +22,7 @@
 #define MAX_PAGE_NUMBER 31
 #define MIN_FRAMES_ALLOWED 4
 #define MAX_FRAMES_ALLOWED 24
-#define MODE 1//0=LRU,1=OPT
+#define MODE 2//0=LRU,1=OPT, 2=both
 
 //globals
 int num_faults = 0;
@@ -30,19 +30,6 @@ int num_frames_alocated = 0;
 int *page_trace;
 const char delim[2] = ",";
 int page_trace_length = 0;
-
-//method sigs
-void LRU(int address);
-void optimal(int address, int current_page_trace_index);
-void add_page(int address);
-bool is_full();
-void inc_staleness();
-void evict_and_replace_LRU(int address);
-void evict_and_replace_old(int address);
-void evict_and_replace_opt(int address, int current_page_trace_index);
-void print_page_table();
-void add_page_old();
-bool find_page(int address);
 
 struct Page
 {
@@ -56,6 +43,21 @@ struct Page
   struct Page *next;
   struct Page *prev;
 };
+
+//method sigs
+void LRU(int address);
+void optimal(int address, int current_page_trace_index);
+void add_page(int address);
+bool is_full();
+void inc_staleness();
+void evict_and_replace_LRU(int address);
+void evict_and_replace_old(int address);
+void evict_and_replace_opt(int address, int current_page_trace_index);
+void print_page_table();
+void add_page_old();
+bool find_page(int address);
+void create_page_table();
+void free_page_table(struct Page *p);
 
 struct Page *head;
 struct Page *tail;
@@ -130,49 +132,7 @@ int main(int argc,char* argv[])
     }
     page_trace_length = RANDOM_PAGE_TRACE_LENGTH;
   }
-  //create the page table stack
-  //creates a static list for num_frames_alocated
-  struct Page *last;
-  for(int i = 0; i < num_frames_alocated+1; i++)
-  {
-    struct Page *temp;
-    temp = malloc(sizeof(struct Page));
-    if(i==0)
-    {
-      head = temp;
-      head->is_head = true;
-      head->is_tail = false;
-      head->address = -1;
-      head->staleness = 0;
-      head->is_empty = true;
-      head->next = NULL;
-      head->prev = NULL;
-      last = head;
-    }
-    else if (i+1==num_frames_alocated)
-    {
-      temp->is_head = false;
-      temp->is_tail = true;
-      temp->is_empty = true;
-      temp->address = -1;
-      temp->staleness = 0;
-      last->next = temp;
-      temp->prev = last;
-      temp->next = NULL;
-    }
-    else
-    {
-      temp->is_head = false;
-      temp->is_tail = false;
-      temp->address = -1;
-      temp->staleness = 0;
-      temp->is_empty = true;
-      last->next = temp;
-      temp->prev = last;
-      temp->next = NULL;
-    }
-    last = temp;
-  }
+  create_page_table();
   //print current page table
   printf("at start, page table is:\n");
   print_page_table();
@@ -180,26 +140,55 @@ int main(int argc,char* argv[])
   //run the page simulation
   if(DEBUG)
       printf("DEBUG: simulation starts, MODE=%d, (%s)\n",MODE, MODE==0? "LRU":"OPT");
-  for(int i = 0; i < page_trace_length; i++)
+  switch(MODE)
   {
-    switch(MODE)
-    {
-      case 0:
+    case 0:
+      for(int i = 0; i < page_trace_length; i++)
+      {
         LRU(page_trace[i]);
-      break;
-      case 1:
+        printf("after round %d, page table is as follows:\n",i+1);
+        print_page_table();
+      }
+      printf("Simluation ends, num_faults=%d\n",num_faults);
+    break;
+    case 1:
+      for(int i = 0; i < page_trace_length; i++)
+      {
         //i in this case can be used an an index for where we are in the page trace
         optimal(page_trace[i],i);
-      break;
-      default:
-        printf("ERROR: Invalid case from MODE: %d\n",MODE);
-        return -1;
-      break;
-    }
-    printf("after round %d, page table is as follows:\n",i+1);
-    print_page_table();
+        printf("after round %d, page table is as follows:\n",i+1);
+        print_page_table();
+      }
+      printf("Simluation ends, num_faults=%d\n",num_faults);
+    break;
+    case 2:
+      printf("Starting LRU (1 of 2)...\n");
+      for(int i = 0; i < page_trace_length; i++)
+      {
+        //LRU first, then optimal
+        LRU(page_trace[i]);
+        printf("after round %d, page table is as follows:\n",i+1);
+        print_page_table();
+      }
+      printf("Simluation (LRU) ends, num_faults=%d\n",num_faults);
+      printf("reseting simulation...\n");
+      free_page_table(head);
+      create_page_table();
+      num_faults = 0;
+      printf("Starting LRU (1 of 2)...\n");
+      for(int i = 0; i < page_trace_length; i++)
+      {
+        optimal(page_trace[i],i);
+        printf("after round %d, page table is as follows:\n",i+1);
+        print_page_table();
+      }
+      printf("Simluation (OPT) ends, num_faults=%d\n",num_faults);
+    break;
+    default:
+      printf("ERROR: Invalid case from MODE: %d\n",MODE);
+      return -1;
+    break;
   }
-  printf("Simluation ends, num_faults=%d\n",num_faults);
   return 0;
 }
 
@@ -515,4 +504,59 @@ bool find_page(int address)
     ref = ref->next;
   }
   return false;
+}
+
+void create_page_table()
+{
+  //create the page table stack
+  //creates a static list for num_frames_alocated
+  struct Page *last;
+  for(int i = 0; i < num_frames_alocated+1; i++)
+  {
+    struct Page *temp;
+    temp = malloc(sizeof(struct Page));
+    if(i==0)
+    {
+      head = temp;
+      head->is_head = true;
+      head->is_tail = false;
+      head->address = -1;
+      head->staleness = 0;
+      head->is_empty = true;
+      head->next = NULL;
+      head->prev = NULL;
+      last = head;
+    }
+    else if (i+1==num_frames_alocated)
+    {
+      temp->is_head = false;
+      temp->is_tail = true;
+      temp->is_empty = true;
+      temp->address = -1;
+      temp->staleness = 0;
+      last->next = temp;
+      temp->prev = last;
+      temp->next = NULL;
+    }
+    else
+    {
+      temp->is_head = false;
+      temp->is_tail = false;
+      temp->address = -1;
+      temp->staleness = 0;
+      temp->is_empty = true;
+      last->next = temp;
+      temp->prev = last;
+      temp->next = NULL;
+    }
+    last = temp;
+  }
+}
+
+void free_page_table(struct Page *p)
+{
+  //free page table from memory
+  if(p->next != NULL)
+    free_page_table(p->next);
+  free(p);
 }
