@@ -1,7 +1,7 @@
 /*
  * Willard Wider
- * 02/12/18
- * lab3.c
+ * 02/13/18
+ * lab4.c
  */
 
 #include <stdio.h>
